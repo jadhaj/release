@@ -46,6 +46,23 @@ passwd:
     - name: core
       ssh_authorized_keys:
       - $(<"${CLUSTER_PROFILE_DIR}/ssh-publickey")
+storage:
+  files:
+    - path: /etc/NetworkManager/system-connections/${baremetal_iface}.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=${baremetal_iface}
+          type=ethernet
+          interface-name=${baremetal_iface}
+          [ipv4]
+          method=disabled
+          [ipv6]
+          method=auto
+          dhcp-duid=ll
+          dhcp-iaid=1
+          may-fail=false
 systemd:
   units:
   - name: console-hook.service
@@ -89,23 +106,6 @@ systemd:
 
       [Install]
       RequiredBy=default.target
-storage:
-  files:
-    - path: /etc/NetworkManager/system-connections/${baremetal_iface}.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=${baremetal_iface}
-          type=ethernet
-          interface-name=${baremetal_iface}
-          [ipv4]
-          method=disabled
-          [ipv6]
-          method=auto
-          dhcp-duid=ll
-          dhcp-iaid=1
-          may-fail=false
 EOF
 done
 
