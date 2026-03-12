@@ -4616,7 +4616,7 @@ tests:
 - as: baremetal-ipi-ovn-ipv6-static-vmedia-f7
   capabilities:
   - intranet
-  cron: 46 21 9,25 * *
+  cron: 43 17 4,11,18,25 * *
   steps:
     cluster_profile: equinix-ocp-metal-qe
     env:

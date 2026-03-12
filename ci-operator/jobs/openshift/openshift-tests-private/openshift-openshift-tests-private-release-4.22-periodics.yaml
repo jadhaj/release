@@ -35015,7 +35015,7 @@ periodics:
         secretName: result-aggregator
 - agent: kubernetes
   cluster: build05
-  cron: 46 21 9,25 * *
+  cron: 43 17 4,11,18,25 * *
   decorate: true
   decoration_config:
     skip_cloning: true
