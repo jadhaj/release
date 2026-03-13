@@ -114,6 +114,8 @@ PROVISIONING_BRIDGE="br-${CLUSTER_NAME: -12}"
 echo "${PROVISIONING_BRIDGE}" > "${SHARED_DIR}/provisioning_bridge"
 PROVISIONING_NETWORK="172.22.${VLAN_ID}.0/24"
 echo "${PROVISIONING_NETWORK}" > "${SHARED_DIR}/provisioning_network"
+PROVISIONING_GW="172.22.${VLAN_ID}.1"
+echo "${PROVISIONING_GW}" > "${SHARED_DIR}/provisioning_gateway"
 NMSTATE_CONFIG="
 interfaces:
 - name: ${PROVISIONING_BRIDGE}

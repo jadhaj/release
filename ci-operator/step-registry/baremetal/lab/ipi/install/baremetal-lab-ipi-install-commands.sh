@@ -95,6 +95,9 @@ CLUSTER_NAME=$(<"${SHARED_DIR}/cluster_name")
 echo "[INFO] Installing from initial release ${OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE}..."
 echo "[INFO] Extracting the baremetal-installer from ${MULTI_RELEASE_IMAGE}..."
 
+export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE="registry.build07.ci.openshift.org/ci-ln-mp2d02b/release:latest"
+export MULTI_RELEASE_IMAGE="registry.build07.ci.openshift.org/ci-ln-mp2d02b/release:latest"
+
 # The extraction may be done from the release-multi-latest image, so that we can extract the openshift-baremetal-install
 # based on the runner architecture. We might need to change this in the future if we want to ship different versions of
 # the installer for different architectures in the same single-arch payload (and then support using a remote libvirt uri
@@ -142,6 +145,7 @@ platform:
       qemu+ssh://root@${AUX_HOST}:$(sed 's/^[%]\?\([0-9]*\)[%]\?$/\1/' < "${CLUSTER_PROFILE_DIR}/provisioning-host-ssh-port-${architecture}")/system?keyfile=${CLUSTER_PROFILE_DIR}/ssh-key&no_verify=1&no_tty=1
     provisioningBridge: $(<"${SHARED_DIR}/provisioning_bridge")
     provisioningNetworkCIDR: $(<"${SHARED_DIR}/provisioning_network")
+    provisioningNetworkGateway: $(<"${SHARED_DIR}/provisioning_gateway")
     externalMACAddress: $(<"${SHARED_DIR}/ipi_bootstrap_mac_address")
     hosts: []
 "
